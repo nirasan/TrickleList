@@ -5,13 +5,20 @@
     android:gravity="center|center_vertical"
     android:weightSum="1">
 
+    <Button
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/deleteButton"
+        android:textSize="9dp" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textView"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:layout_weight="1.43" />
 
     <ToggleButton
@@ -20,5 +27,5 @@
         android:text="ToggleButton"
         android:id="@+id/toggleButton"
         android:textOff="TODO"
-        android:textOn="DONE" />
+        android:textOn="DONE"/>
 </LinearLayout>
