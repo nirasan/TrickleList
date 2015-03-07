@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android-bootstrap="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center|center_vertical"
     android:weightSum="1">
-
-    <Button
-        android:layout_width="57dp"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:id="@+id/deleteButton"
-        android:textSize="9dp" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -19,13 +14,27 @@
         android:text="Large Text"
         android:id="@+id/textView"
         android:textSize="30dp"
-        android:layout_weight="1.43" />
+        android:layout_weight="1" />
 
-    <ToggleButton
+    <com.beardedhen.androidbootstrap.FontAwesomeText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ToggleButton"
+        android-bootstrap:fa_icon="fa-trash-o"
+        android:layout_margin="10dp"
+        android:textSize="30dp"
+        android:clickable="true"
+        android:id="@+id/deleteButton"
+        android:textColor="@color/bbutton_danger"
+        />
+
+    <com.beardedhen.androidbootstrap.FontAwesomeText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android-bootstrap:fa_icon="fa-check-square-o"
+        android:layout_margin="0dp"
+        android:textSize="30dp"
+        android:clickable="true"
         android:id="@+id/toggleButton"
-        android:textOff="TODO"
-        android:textOn="DONE"/>
+        android:textColor="@color/gray"
+        />
 </LinearLayout>

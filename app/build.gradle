@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    compile project(':AndroidBootstrap:AndroidBootstrap')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/activeandroid-3.0.jar')

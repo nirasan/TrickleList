@@ -8,16 +8,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.beardedhen.androidbootstrap.FontAwesomeText;
 
 import java.util.List;
 
@@ -26,11 +26,11 @@ public class MainActivity extends ActionBarActivity {
 
     public static MainActivity instance;
 
-    private String TAG = "v";
+    private String TAG = "MainActivity";
 
     ListView listView;
-    EditText editText;
-    Button addButton;
+    BootstrapEditText editText;
+    BootstrapButton addButton;
     static List<Habit> habits;
     HabitAdapter adapter;
 
@@ -48,8 +48,8 @@ public class MainActivity extends ActionBarActivity {
 
     protected void findViews() {
         listView = (ListView)findViewById(R.id.listView);
-        editText = (EditText)findViewById(R.id.editText);
-        addButton = (Button)findViewById(R.id.button);
+        editText = (BootstrapEditText)findViewById(R.id.editText);
+        addButton = (BootstrapButton)findViewById(R.id.button);
     }
 
     protected void setListeners() {
@@ -57,6 +57,9 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 addItem(editText.getText().toString());
+                editText.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         });
     }
@@ -102,8 +105,8 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             TextView textView;
-            ToggleButton toggleButton;
-            Button deleteButton;
+            FontAwesomeText toggleButton;
+            FontAwesomeText deleteButton;
             View v = convertView;
             if (v == null) {
                 LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -112,15 +115,22 @@ public class MainActivity extends ActionBarActivity {
             final Habit habit = (Habit)getItem(position);
             if (habit != null) {
                 textView = (TextView)v.findViewById(R.id.textView);
-                toggleButton = (ToggleButton)v.findViewById(R.id.toggleButton);
-                deleteButton = (Button)v.findViewById(R.id.deleteButton);
-                toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                toggleButton = (FontAwesomeText)v.findViewById(R.id.toggleButton);
+                deleteButton = (FontAwesomeText)v.findViewById(R.id.deleteButton);
+
+                final int checkedColor = getResources().getColor(R.color.bbutton_success);
+                final int uncheckedColor = getResources().getColor(R.color.gray);
+                toggleButton.setTextColor(habit.isChecked ? checkedColor : uncheckedColor);
+                toggleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        habit.isChecked = isChecked;
+                    public void onClick(View v) {
+                        FontAwesomeText t = (FontAwesomeText)v;
+                        habit.isChecked = !habit.isChecked;
+                        t.setTextColor(habit.isChecked ? checkedColor : uncheckedColor);
                         habit.save();
                     }
                 });
+
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -133,7 +143,7 @@ public class MainActivity extends ActionBarActivity {
                                 deleteItem(position);
                             }
                         });
-                        builder.setNegativeButton("", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton("いいえ", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
@@ -144,7 +154,7 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
                 textView.setText(habit.name);
-                toggleButton.setChecked(habit.isChecked);
+                //toggleButton.setChecked(habit.isChecked);
             }
             return v;
         }

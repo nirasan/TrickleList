@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidBootstrap/AndroidBootstrap.iml" filepath="$PROJECT_DIR$/AndroidBootstrap/AndroidBootstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidBootstrap/AndroidBootstrap/AndroidBootstrap-AndroidBootstrap.iml" filepath="$PROJECT_DIR$/AndroidBootstrap/AndroidBootstrap/AndroidBootstrap-AndroidBootstrap.iml" />
       <module fileurl="file://$PROJECT_DIR$/TrickleList.iml" filepath="$PROJECT_DIR$/TrickleList.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

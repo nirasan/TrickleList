@@ -1,5 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:android-bootstrap="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -20,18 +22,30 @@
             android:layout_gravity="center_vertical"
             android:weightSum="1">
 
-            <EditText
+            <com.beardedhen.androidbootstrap.BootstrapEditText
+                android:id="@+id/editText"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="10dp"
+                android:hint="New Habit"
+                android:textSize="28dp"
+                android-bootstrap:be_roundedCorners="true"
+                android-bootstrap:be_state="success"
+                android:layout_weight="1"
+                />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:id="@+id/editText"
-                android:layout_weight="0.97"
-                android:textSize="40dp" />
-
-            <Button
-                android:layout_width="64dp"
-                android:layout_height="fill_parent"
-                android:text="Add"
-                android:id="@+id/button" />
+                android:layout_margin="10dp"
+                android:text=""
+                android:textSize="18dp"
+                android-bootstrap:bb_icon_right="fa-plus"
+                android-bootstrap:bb_type="warning"
+                android-bootstrap:bb_roundedCorners="true"
+                android:id="@+id/button"
+                android:layout_weight="1"
+                />
         </LinearLayout>
 
         <ListView
