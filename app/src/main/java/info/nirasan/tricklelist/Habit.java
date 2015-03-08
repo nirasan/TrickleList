@@ -5,7 +5,6 @@ import android.util.Log;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-import com.activeandroid.query.Delete;
 import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 
@@ -44,10 +43,5 @@ public class Habit extends Model{
     public boolean hasTodayStatus() {
         List<Status> statuses = getTodayStatuses();
         return statuses.size() > 0;
-    }
-
-    public void deleteWithStatus() {
-        new Delete().from(Status.class).where("Habit = ?", this.getId()).execute();
-        this.delete();
     }
 }

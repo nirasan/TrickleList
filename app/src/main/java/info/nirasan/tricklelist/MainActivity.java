@@ -80,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
 
     protected void deleteItem(int position) {
         Habit habit = habits.get(position);
-        habit.deleteWithStatus();
+        habit.delete(); //habit.deleteWithStatus();
         habits.remove(position);
         adapter.notifyDataSetChanged();
     }

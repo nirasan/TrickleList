@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "Statuses")
 public class Status extends Model {
 
-    @Column(name = "Habit")
+    @Column(name = "Habit", onDelete = Column.ForeignKeyAction.CASCADE)
     public Habit habit;
 
     @Column(name = "CreatedDate")
