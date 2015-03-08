@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void addItem(String name) {
-        Habit habit = new Habit(name, false);
+        Habit habit = new Habit(name);
         habit.save();
         habits.add(habit);
         adapter.notifyDataSetChanged();
@@ -79,7 +80,7 @@ public class MainActivity extends ActionBarActivity {
 
     protected void deleteItem(int position) {
         Habit habit = habits.get(position);
-        habit.delete();
+        habit.deleteWithStatus();
         habits.remove(position);
         adapter.notifyDataSetChanged();
     }
@@ -104,6 +105,7 @@ public class MainActivity extends ActionBarActivity {
         }
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            com.activeandroid.util.Log.setEnabled(true);
             TextView textView;
             FontAwesomeText toggleButton;
             FontAwesomeText deleteButton;
@@ -120,13 +122,23 @@ public class MainActivity extends ActionBarActivity {
 
                 final int checkedColor = getResources().getColor(R.color.bbutton_success);
                 final int uncheckedColor = getResources().getColor(R.color.gray);
-                toggleButton.setTextColor(habit.isChecked ? checkedColor : uncheckedColor);
+                boolean checked = habit.hasTodayStatus();
+                toggleButton.setTextColor(checked ? checkedColor : uncheckedColor);
                 toggleButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         FontAwesomeText t = (FontAwesomeText)v;
-                        habit.isChecked = !habit.isChecked;
-                        t.setTextColor(habit.isChecked ? checkedColor : uncheckedColor);
+                        boolean checked = habit.hasTodayStatus();
+                        if (checked) {
+                            Log.d(TAG, "STATUS DELETED");
+                            Status status = habit.getTodayStatus();
+                            status.delete();
+                        } else {
+                            Log.d(TAG, "STATUS CREATED");
+                            Status s = new Status(habit, Status.getToday(), 1);
+                            s.save();
+                        }
+                        t.setTextColor(!checked ? checkedColor : uncheckedColor);
                         habit.save();
                     }
                 });
@@ -154,7 +166,6 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
                 textView.setText(habit.name);
-                //toggleButton.setChecked(habit.isChecked);
             }
             return v;
         }
