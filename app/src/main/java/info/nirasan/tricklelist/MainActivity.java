@@ -3,12 +3,14 @@ package info.nirasan.tricklelist;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -60,6 +62,17 @@ public class MainActivity extends ActionBarActivity {
                 editText.setText("");
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Habit habit = habits.get(position);
+                if (habit != null) {
+                    Intent intent = new Intent(getApplicationContext(), StatusActivity.class);
+                    intent.putExtra("HabitId", habit.getId());
+                    startActivity(intent);
+                }
             }
         });
     }
