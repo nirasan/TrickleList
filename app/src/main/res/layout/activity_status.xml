@@ -8,56 +8,13 @@
     tools:context="info.nirasan.tricklelist.StatusActivity">
 
 
-    <TableLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/relativeLayout">
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/tableRow0"
-            >
+    </RelativeLayout>
 
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android-bootstrap:fa_icon="fa-meh-o"
-                android:layout_margin="10dp"
-                android:textSize="30dp"
-                android:clickable="true"
-                android:id="@+id/fatext_col0"
-                android:textColor="@color/gray"
-                />
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android-bootstrap:fa_icon="fa-meh-o"
-                android:layout_margin="10dp"
-                android:textSize="30dp"
-                android:clickable="true"
-                android:id="@+id/fatext_col1"
-                android:textColor="@color/gray"
-                />
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android-bootstrap:fa_icon="fa-meh-o"
-                android:layout_margin="10dp"
-                android:textSize="30dp"
-                android:clickable="true"
-                android:id="@+id/fatext_col2"
-                android:textColor="@color/gray"
-                />
-            <com.beardedhen.androidbootstrap.FontAwesomeText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android-bootstrap:fa_icon="fa-meh-o"
-                android:layout_margin="10dp"
-                android:textSize="30dp"
-                android:clickable="true"
-                android:id="@+id/fatext_col3"
-                android:textColor="@color/gray"
-                />
-            </TableRow>
-    </TableLayout>
 </RelativeLayout>
