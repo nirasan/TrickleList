@@ -1,11 +1,8 @@
 package info.nirasan.tricklelist;
 
-import android.util.Log;
-
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
-import com.activeandroid.query.From;
 import com.activeandroid.query.Select;
 
 import java.util.Date;
@@ -28,12 +25,10 @@ public class Habit extends Model{
 
     public List<Status> getTodayStatuses() {
         Date today = Status.getToday();
-        Log.d("Habit", String.valueOf(today.getTime()));
-        From f = new Select()
+        return new Select()
                 .from(Status.class)
-                .where("Habit = ? and CreatedDate = ?", this.getId(), today.getTime());
-        Log.d("Habit", f.toString());
-        return f.execute();
+                .where("Habit = ? and CreatedDate = ?", this.getId(), today.getTime())
+                .execute();
     }
 
     public Status getTodayStatus() {

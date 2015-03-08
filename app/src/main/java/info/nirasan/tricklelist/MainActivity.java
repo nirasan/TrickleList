@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,16 +129,13 @@ public class MainActivity extends ActionBarActivity {
                         FontAwesomeText t = (FontAwesomeText)v;
                         boolean checked = habit.hasTodayStatus();
                         if (checked) {
-                            Log.d(TAG, "STATUS DELETED");
                             Status status = habit.getTodayStatus();
                             status.delete();
                         } else {
-                            Log.d(TAG, "STATUS CREATED");
                             Status s = new Status(habit, Status.getToday(), 1);
                             s.save();
                         }
                         t.setTextColor(!checked ? checkedColor : uncheckedColor);
-                        habit.save();
                     }
                 });
 
