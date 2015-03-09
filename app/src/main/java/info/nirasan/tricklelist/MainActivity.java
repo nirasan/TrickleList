@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Select;
@@ -147,6 +148,7 @@ public class MainActivity extends ActionBarActivity {
                         } else {
                             Status s = new Status(habit, Status.getToday(), 1);
                             s.save();
+                            Toast.makeText(instance, "Wow!", Toast.LENGTH_SHORT).show();
                         }
                         t.setTextColor(!checked ? checkedColor : uncheckedColor);
                     }
