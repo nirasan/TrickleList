@@ -22,7 +22,9 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.FontAwesomeText;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -104,6 +106,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private class HabitAdapter extends BaseAdapter {
+        List<String> toastWords = Arrays.asList("Great!", "Awesome!", "Wow!", "Cool!", "Way to go!", "Terrific!", "Right on!");
         @Override
         public int getCount() {
             return habits.size();
@@ -148,7 +151,9 @@ public class MainActivity extends ActionBarActivity {
                         } else {
                             Status s = new Status(habit, Status.getToday(), 1);
                             s.save();
-                            Toast.makeText(instance, "Wow!", Toast.LENGTH_SHORT).show();
+                            Random r = new Random();
+                            String word = toastWords.get(r.nextInt(toastWords.size() - 1));
+                            Toast.makeText(instance, word, Toast.LENGTH_SHORT).show();
                         }
                         t.setTextColor(!checked ? checkedColor : uncheckedColor);
                     }
