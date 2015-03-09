@@ -136,7 +136,7 @@ public class MainActivity extends ActionBarActivity {
                 toggleButton = (FontAwesomeText)v.findViewById(R.id.toggleButton);
                 deleteButton = (FontAwesomeText)v.findViewById(R.id.deleteButton);
 
-                final int checkedColor = getResources().getColor(R.color.bbutton_success);
+                final int checkedColor = getResources().getColor(R.color.tldarkblue);
                 final int uncheckedColor = getResources().getColor(R.color.gray);
                 boolean checked = habit.hasTodayStatus();
                 toggleButton.setTextColor(checked ? checkedColor : uncheckedColor);

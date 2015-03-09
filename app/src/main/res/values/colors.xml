@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="gray">#BEBEBE</color>
+    <color name="tlblue">#d1e8ff</color>
+    <color name="tldarkblue">#486d94</color>
+    <color name="tlgray">#eeeeee</color>
 </resources>

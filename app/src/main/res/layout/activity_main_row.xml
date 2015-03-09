@@ -24,7 +24,7 @@
         android:textSize="30dp"
         android:clickable="true"
         android:id="@+id/deleteButton"
-        android:textColor="@color/bbutton_danger"
+        android:textColor="@color/gray"
         />
 
     <com.beardedhen.androidbootstrap.FontAwesomeText

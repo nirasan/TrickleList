@@ -6,13 +6,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.activeandroid.query.Select;
 import com.beardedhen.androidbootstrap.FontAwesomeText;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,10 +23,12 @@ import java.util.List;
 
 public class StatusActivity extends ActionBarActivity {
 
-    static final int dayNumber = 30;
+    static final int dayNumber = 63;
 
     Habit habit;
     List<Status> statuses;
+
+    protected static StatusActivity instance;
 
     int successCount7days = 0;
     int successCount30days = 0;
@@ -32,6 +37,7 @@ public class StatusActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
+        instance = this;
         setHabit();
         setStatuses();
         createTexts();
@@ -65,7 +71,7 @@ public class StatusActivity extends ActionBarActivity {
         for (int i = 0; i < dayNumber; i++) {
             // create Date
             boolean done = false;
-            Date date = calender.getTime();
+            final Date date = calender.getTime();
             if (statuses.size() > statusesIndex) {
                 Status status = statuses.get(statusesIndex);
                 if (status.createdDate.equals(date)) {
@@ -84,24 +90,33 @@ public class StatusActivity extends ActionBarActivity {
             int id = i + 1;
             t.setId(id);
             t.setClickable(true);
-            t.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+            t.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
             if (done) {
                 t.setIcon("fa-smile-o");
-                t.setTextColor(getResources().getColor(R.color.bbutton_success));
+                t.setTextColor(getResources().getColor(R.color.tldarkblue));
             } else {
                 t.setIcon("fa-meh-o");
                 t.setTextColor(getResources().getColor(R.color.gray));
             }
             t.setAlpha(0);
+            // set onclick
+            t.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Toast.makeText(instance, sdf.format(date), Toast.LENGTH_SHORT).show();
+                }
+            });
             // ディスプレイの横幅を取得
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             final float width = displayMetrics.widthPixels / displayMetrics.density;
             String TAG = "MainActivity";
             // 左端要素の margin left を取得
-            int textWidth = 31; //(int)(t.getMeasuredWidth() / displayMetrics.density);
-            int marginTop = 10;
-            int marginRight = 10;
-            int marginLeft = (int)((width - (textWidth * 7 + marginRight * 6 + 32)) / 2);
+            int textWidth = 18; //(int)(t.getMeasuredWidth() / displayMetrics.density);
+            int colNumber = 7;
+            int marginTop = 15;
+            int marginRight = 5;
+            int marginLeft = (int)((width - (textWidth * colNumber + marginRight * 6 + 32)) / 2);
             int marginTopPx = (int)(marginTop * displayMetrics.density);
             int marginRightPx = (int)(marginRight * displayMetrics.density);
             int marginLeftPx = (int)(marginLeft * displayMetrics.density);
@@ -110,7 +125,7 @@ public class StatusActivity extends ActionBarActivity {
                 p.addRule(RelativeLayout.ALIGN_LEFT, RelativeLayout.TRUE);
                 p.setMargins(marginLeftPx, marginTopPx, marginRightPx, 0);
             } else {
-                if (i % 7 == 0) {
+                if (i % colNumber == 0) {
                     p.addRule(RelativeLayout.BELOW, prevId);
                     p.addRule(RelativeLayout.ALIGN_LEFT, RelativeLayout.TRUE);
                     p.setMargins(marginLeftPx, marginTopPx, marginRightPx, 0);
@@ -127,7 +142,7 @@ public class StatusActivity extends ActionBarActivity {
             // 前の要素の更新
             prevId = t.getId();
             parent.addView(t, p);
-            calender.add(Calendar.DAY_OF_MONTH, 1);
+            calender.add(Calendar.DAY_OF_MONTH, -1);
         }
 
         // 成功率の表示

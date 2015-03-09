@@ -25,6 +25,8 @@
                 android-bootstrap:fa_icon="fa-info-circle"
                 android:layout_margin="5dp"
                 android:textSize="32sp"
+                android:gravity="bottom"
+                android:textColor="@color/tldarkblue"
                 />
 
             <TextView
@@ -35,8 +37,18 @@
                 android:id="@+id/habitNameTextView"
                 android:layout_margin="5dp"
                 android:textSize="32sp"
-                android:gravity="bottom" />
+                android:gravity="bottom"
+                />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:src="@android:drawable/divider_horizontal_textfield"
+            android:scaleType="fitXY"
+            android:gravity="fill_horizontal"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -50,6 +62,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Last  7days"
                 android:textSize="12sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/gray"
                 />
 
             <TextView
@@ -59,6 +73,8 @@
                 android:text="100%"
                 android:id="@+id/successRate7days"
                 android:textSize="24sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/tldarkblue"
                 />
         </LinearLayout>
 
@@ -74,6 +90,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Last 30days"
                 android:textSize="12sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/gray"
                 />
 
             <TextView
@@ -83,8 +101,19 @@
                 android:text="100%"
                 android:id="@+id/successRate30days"
                 android:textSize="24sp"
+                android:layout_margin="5dp"
+                android:textColor="@color/tldarkblue"
                 />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:src="@android:drawable/divider_horizontal_textfield"
+            android:scaleType="fitXY"
+            android:gravity="fill_horizontal"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"/>
 
         <RelativeLayout
             android:layout_width="fill_parent"

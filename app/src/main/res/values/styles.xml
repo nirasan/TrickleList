@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- android:actionBarStyleからandroid:を省く -->
         <item name="actionBarStyle">@style/ActionBarStyle</item>
+        <item name="android:colorBackground">@color/tlgray</item>
     </style>
 
     <!-- Widget.AppCompat.ActionBarに書き換え -->
@@ -11,13 +12,13 @@
         <!-- android:titleTextStyleからandroid:を省く -->
         <item name="titleTextStyle">@style/ActionBarTitleStyle</item>
         <!-- android:backgroundからandroid:を省く -->
-        <item name="background">@color/gray</item>
+        <item name="background">@color/tlblue</item>
     </style>
 
     <!-- TextAppearance.AppCompat.Widget.ActionBar.Titleに書き換え -->
     <style name="ActionBarTitleStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/tldarkblue</item>
         <item name="android:typeface">sans</item>
     </style>
 </resources>
