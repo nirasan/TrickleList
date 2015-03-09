@@ -20,10 +20,13 @@ import java.util.List;
 
 public class StatusActivity extends ActionBarActivity {
 
-    static final int dayNumber = 28;
+    static final int dayNumber = 30;
 
     Habit habit;
     List<Status> statuses;
+
+    int successCount7days = 0;
+    int successCount30days = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,11 @@ public class StatusActivity extends ActionBarActivity {
                     done = true;
                 }
             }
+            // count success
+            if (done) {
+                if (i < 7)  { successCount7days  += 1; }
+                if (i < 30) { successCount30days += 1; }
+            }
             // create FontAwesomeText
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             FontAwesomeText t = new FontAwesomeText(this);
@@ -91,7 +99,7 @@ public class StatusActivity extends ActionBarActivity {
             String TAG = "MainActivity";
             // 左端要素の margin left を取得
             int textWidth = 31; //(int)(t.getMeasuredWidth() / displayMetrics.density);
-            int marginTop = 30;
+            int marginTop = 10;
             int marginRight = 10;
             int marginLeft = (int)((width - (textWidth * 7 + marginRight * 6 + 32)) / 2);
             int marginTopPx = (int)(marginTop * displayMetrics.density);
@@ -121,5 +129,13 @@ public class StatusActivity extends ActionBarActivity {
             parent.addView(t, p);
             calender.add(Calendar.DAY_OF_MONTH, 1);
         }
+
+        // 成功率の表示
+        int rate7days = successCount7days * 100 / 7;
+        TextView successRate7days = (TextView)findViewById(R.id.successRate7days);
+        successRate7days.setText(String.format("%3d%%", rate7days));
+        int rate30days = successCount30days * 100 / 30;
+        TextView successRate30days = (TextView)findViewById(R.id.successRate30days);
+        successRate30days.setText(String.format("%3d%%", rate30days));
     }
 }

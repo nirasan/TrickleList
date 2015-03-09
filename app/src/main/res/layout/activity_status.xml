@@ -22,7 +22,7 @@
             <com.beardedhen.androidbootstrap.FontAwesomeText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android-bootstrap:fa_icon="fa-tint"
+                android-bootstrap:fa_icon="fa-info-circle"
                 android:layout_margin="5dp"
                 android:textSize="32sp"
                 />
@@ -35,6 +35,54 @@
                 android:id="@+id/habitNameTextView"
                 android:layout_margin="5dp"
                 android:textSize="32sp"
+                android:gravity="bottom" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Last  7days"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="100%"
+                android:id="@+id/successRate7days"
+                android:textSize="24sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Last 30days"
+                android:textSize="12sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="100%"
+                android:id="@+id/successRate30days"
+                android:textSize="24sp"
                 />
         </LinearLayout>
 
