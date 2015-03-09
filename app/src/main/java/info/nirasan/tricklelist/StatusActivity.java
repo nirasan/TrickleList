@@ -1,5 +1,6 @@
 package info.nirasan.tricklelist;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,7 +8,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.activeandroid.query.Select;
 import com.beardedhen.androidbootstrap.FontAwesomeText;
@@ -30,14 +31,16 @@ public class StatusActivity extends ActionBarActivity {
         setContentView(R.layout.activity_status);
         setHabit();
         setStatuses();
-        renderLayout();
+        createTexts();
     }
 
     void setHabit() {
         Intent intent = getIntent();
         Long habitId = intent.getLongExtra("HabitId", 0);
         habit = Habit.load(Habit.class, habitId);
-        Toast.makeText(this, habit.name, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, habit.name, Toast.LENGTH_LONG).show();
+        TextView textView = (TextView)findViewById(R.id.habitNameTextView);
+        textView.setText(habit.name);
     }
 
     void setStatuses() {
@@ -49,13 +52,13 @@ public class StatusActivity extends ActionBarActivity {
                 .execute();
     }
 
-    void renderLayout() {
+    void createTexts() {
         int statusesIndex = 0;
         Date today = Status.getToday();
         Calendar calender = Calendar.getInstance();
         calender.setTime(today);
+        RelativeLayout parent = (RelativeLayout) findViewById(R.id.relativeLayout);
         int prevId = 0;
-        RelativeLayout parent = (RelativeLayout)findViewById(R.id.relativeLayout);
         for (int i = 0; i < dayNumber; i++) {
             // create Date
             boolean done = false;
@@ -81,30 +84,41 @@ public class StatusActivity extends ActionBarActivity {
                 t.setIcon("fa-meh-o");
                 t.setTextColor(getResources().getColor(R.color.gray));
             }
+            t.setAlpha(0);
             // ディスプレイの横幅を取得
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             final float width = displayMetrics.widthPixels / displayMetrics.density;
+            String TAG = "MainActivity";
             // 左端要素の margin left を取得
+            int textWidth = 31; //(int)(t.getMeasuredWidth() / displayMetrics.density);
             int marginTop = 30;
-            int marginRight = 30;
-            int marginLeft = (int)((width - (t.getWidth() / displayMetrics.density * 7) - (marginRight * 6)) / 2);
+            int marginRight = 10;
+            int marginLeft = (int)((width - (textWidth * 7 + marginRight * 6 + 32)) / 2);
+            int marginTopPx = (int)(marginTop * displayMetrics.density);
+            int marginRightPx = (int)(marginRight * displayMetrics.density);
+            int marginLeftPx = (int)(marginLeft * displayMetrics.density);
             // 位置パラメータのセット
             if (prevId == 0) {
                 p.addRule(RelativeLayout.ALIGN_LEFT, RelativeLayout.TRUE);
-                p.setMargins(marginLeft, marginTop, marginRight, 0);
+                p.setMargins(marginLeftPx, marginTopPx, marginRightPx, 0);
             } else {
                 if (i % 7 == 0) {
                     p.addRule(RelativeLayout.BELOW, prevId);
                     p.addRule(RelativeLayout.ALIGN_LEFT, RelativeLayout.TRUE);
-                    p.setMargins(marginLeft, marginTop, marginRight, 0);
+                    p.setMargins(marginLeftPx, marginTopPx, marginRightPx, 0);
                 } else {
                     p.addRule(RelativeLayout.ALIGN_TOP, prevId);
                     p.addRule(RelativeLayout.RIGHT_OF, prevId);
-                    p.setMargins(0, 0, marginRight, 0);
+                    p.setMargins(0, 0, marginRightPx, 0);
                 }
             }
+            // alphaプロパティを0fから1fに変化させる
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(t, "alpha", 0f, 1f);
+            objectAnimator.setDuration(i * 500);
+            objectAnimator.start();
+            // 前の要素の更新
+            prevId = t.getId();
             parent.addView(t, p);
-            prevId = id;
             calender.add(Calendar.DAY_OF_MONTH, 1);
         }
     }

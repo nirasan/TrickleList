@@ -1,20 +1,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:android-bootstrap="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="info.nirasan.tricklelist.StatusActivity">
 
-
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/relativeLayout">
+        android:layout_height="fill_parent">
 
-    </RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal">
+
+            <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android-bootstrap:fa_icon="fa-tint"
+                android:layout_margin="5dp"
+                android:textSize="32sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/habitNameTextView"
+                android:layout_margin="5dp"
+                android:textSize="32sp"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/relativeLayout"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
 
 </RelativeLayout>
